@@ -8,8 +8,8 @@ public class Solution {
             {
                 if(nums[i] + nums[j] == target)
                 {
-                    ans[0] = i;
                     ans[1] = j;
+                    ans[0] = i;
                 }
             }
         }
