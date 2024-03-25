@@ -1,13 +1,16 @@
 public class Solution {
     public IList<int> FindDuplicates(int[] nums) {
-        Array.Sort(nums);
-        List<int> ans = new List<int>();
+        var dic = new Dictionary<int, int>();
+for(var i = 0; i < nums.Length; i++)
+{
+    if (!dic.ContainsKey(nums[i]))
+        dic.Add(nums[i], 1);
+    else
+        dic[nums[i]]++;
+    
+}
 
-        for(var i = 1; i < nums.Length; i++)
-        {
-            if(nums[i] == nums[i - 1])
-                ans.Add(nums[i]);
-        }
-        return ans;
+var ans = dic.Where(num => num.Value > 1).Select(num => num.Key).ToList();
+return ans;
     }
 }
