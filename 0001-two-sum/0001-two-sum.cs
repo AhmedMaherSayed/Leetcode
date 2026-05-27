@@ -1,24 +1,18 @@
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
-        // Sort + Two Pointers
-       var indexed = nums.Select((val, idx) => (val, idx))
-                        .OrderBy(x => x.val)
-                        .ToArray();
+        // HashMap ✅ Optimal
+         var seen = new Dictionary<int, int>(nums.Length); // pre-sized
 
-        int leftPointer = 0;
-        int rightPointer = indexed.Length - 1;
+    for (int i = 0; i < nums.Length; i++)
+    {
+        int complement = target - nums[i];
 
-        while (leftPointer < rightPointer)
-        {
-            int sum = indexed[leftPointer].val + indexed[rightPointer].val;
+        if (seen.TryGetValue(complement, out int j))
+            return [j, i];
 
-            if (sum == target)
-                return [indexed[leftPointer].idx, indexed[rightPointer].idx];
-            else if (sum < target)
-                leftPointer++;
-            else
-                rightPointer--;
-        }
-        return [];
+        seen[nums[i]] = i;
+    }
+
+    return [];
     }
 }
