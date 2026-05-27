@@ -1,18 +1,24 @@
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
-        // Brute Force
-       int[] ans = { -1, -1 };
-        for (int i = 0; i < nums.Length; i++)
+        // Sort + Two Pointers
+       var indexed = nums.Select((val, idx) => (val, idx))
+                        .OrderBy(x => x.val)
+                        .ToArray();
+
+        int leftPointer = 0;
+        int rightPointer = indexed.Length - 1;
+
+        while (leftPointer < rightPointer)
         {
-            for (int j = i + 1; j < nums.Length; j++)
-            {
-              if (nums[i] + nums[j] == target)
-             {
-                 ans[0] = i;
-                ans[1] = j;
-             }
-    }
-}
-        return ans;
+            int sum = indexed[leftPointer].val + indexed[rightPointer].val;
+
+            if (sum == target)
+                return [indexed[leftPointer].idx, indexed[rightPointer].idx];
+            else if (sum < target)
+                leftPointer++;
+            else
+                rightPointer--;
+        }
+        return [];
     }
 }
