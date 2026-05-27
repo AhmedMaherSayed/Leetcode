@@ -1,35 +1,18 @@
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
+        // Brute Force
        int[] ans = { -1, -1 };
-    Dictionary<int, int> dic = new();
-
-    for (int i = 0; i < nums.Length; i++)
-    {
-        dic[nums[i]] = i;
-    }
-    int temp = 0;
-    for (int i = 0; i < nums.Length; i++)
-    {
-        temp = target - nums[i];
-
-        
-        if (dic.ContainsKey(temp))
+        for (int i = 0; i < nums.Length; i++)
         {
-            if (dic[temp] == i)
-        continue;
-         if(i > dic[temp])
+            for (int j = i + 1; j < nums.Length; j++)
             {
-            ans[0] = dic[temp];
-            ans[1] = i;
-         }
-        else
-        {
-            ans[0] = i;
-            ans[1] = dic[temp];
-        }
-        
+              if (nums[i] + nums[j] == target)
+             {
+                 ans[0] = i;
+                ans[1] = j;
+             }
     }
-    }
-    return ans;
+}
+        return ans;
     }
 }
