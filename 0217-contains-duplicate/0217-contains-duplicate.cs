@@ -1,12 +1,15 @@
 public class Solution {
         public bool ContainsDuplicate(int[] nums) {
-            Array.Sort(nums);
-            for (int i = 0; i < nums.Length -1; i++)
-            {
-                if (nums[i] == nums[i + 1])
-                    return true;
-            }
+             var seen = new HashSet<int>(nums.Length); // pre-size to avoid rehashing
 
-            return false;
+ foreach (int num in nums)
+ {
+     if (seen.Contains(num))
+         return true;
+
+     seen.Add(num);
+ }
+
+ return false;
         }
 }
