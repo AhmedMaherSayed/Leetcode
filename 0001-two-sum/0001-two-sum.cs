@@ -1,18 +1,14 @@
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
-        // HashMap ✅ Optimal
-         var seen = new Dictionary<int, int>(nums.Length); // pre-sized
-
-    for (int i = 0; i < nums.Length; i++)
-    {
-        int complement = target - nums[i];
-
-        if (seen.TryGetValue(complement, out int j))
-            return [j, i];
-
-        seen[nums[i]] = i;
-    }
-
+     
+     for (int i =0; i < nums.Length; i++)
+     {
+        for (int j = i + 1; j < nums.Length; j++)
+        {
+            if (nums[i] + nums[j] == target)
+                return [i, j];
+        }
+     }
     return [];
     }
 }
