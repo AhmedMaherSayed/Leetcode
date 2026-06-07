@@ -1,24 +1,17 @@
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
-        var indexed = nums.Select((val, idx) => (val, idx))
-                          .OrderBy(x => x.val)
-                          .ToArray();
+        var seen = new Dictionary<int, int>(nums.Length);
+        int diff = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            diff = target - nums[i];
 
-     int leftPtr = 0;
-     int rightPtr = nums.Length - 1;
-    int sum = 0;
-     while (leftPtr < rightPtr)
-     {
-        sum = indexed[leftPtr].val + indexed[rightPtr].val;
+            if (seen.TryGetValue(diff, out int idx))
+                return [idx, i];
+            
+            seen[nums[i]] = i;
+        }
 
-        if (sum == target)
-            return [indexed[leftPtr].idx, indexed[rightPtr].idx];
-        else if (sum > target)
-            rightPtr--;
-        else if (sum < target)
-            leftPtr++;
-     }
-
-     return [];
+        return [];
     }
 }
