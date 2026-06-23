@@ -3,13 +3,12 @@ public class Solution {
             if (strs is null || strs.Length == 0)
                 return string.Empty;
 
+            Array.Sort(strs);
+
             for (int i = 0; i < strs[0].Length; i++)
             {
-                for (int j = 1; j < strs.Length; j++)
-                {
-                    if (i >= strs[j].Length ||strs[0][i] != strs[j][i])
-                        return strs[0][..i];
-                }
+                if (i >= strs[strs.Length - 1].Length || strs[0][i] != strs[strs.Length - 1][i])
+                    return strs[0].Substring(0, i);
             }
 
             return strs[0];  
